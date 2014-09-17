@@ -1,20 +1,34 @@
-Getting-and-Cleaning-Data
-=========================
-The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected.  
+Course Project - Getting and Cleaning Data
+Author
 
-One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained: 
+Instructions
 
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+Clone this repository and run the run_analysis.R script from within the cloned repository root directory.
 
-Here are the data for the project: 
+This script will download and process the data set generating a tidy data set at ./data/TidyDataSet.txt
 
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+Data Source
 
- You should create one R script called run_analysis.R that does the following. 
-Merges the training and the test sets to create one data set.
-Extracts only the measurements on the mean and standard deviation for each measurement. 
-Uses descriptive activity names to name the activities in the data set
-Appropriately labels the data set with descriptive variable names. 
-From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+This project uses the "Human Activity Recognition Using Smartphones Dataset" downloaded to ./data/Dataset.zip by run_analysis.R from: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-Good luck!
+Script Walkthrough
+
+The run_analysis.R script will perform the following steps:
+
+Require reshape2 library (for the melt() function)
+Ensure the data path exists (./data)
+Checks if the data set archive was already downloaded
+Downloading the data set archive if it was not already
+Timestamps the data set archive file with when it wad downloaded
+Extracts the data set files from the archive
+Reads training & test column files into respective x,y,s variables
+Reads feaure names and sets column/variable names respectively
+Appends the training and test data set rows
+Creates a unified data set (data frame)
+Extracts measurements on mean & standard deviation, for each measurement
+Sets activity names on the class labels
+Labels data with descriptive variable/column names by removing special characters in the column names and by replacing hyphen's with underscores in the column names
+Removes columns used only for tidying up the data set (intermediate calculations)
+Melts the data set (note this is why we require reshape2 library)
+Creates a second, independent, tidy data set which contains the average of each variable for each activity and subject
+Saves the resulting tidy data set to file ./data/TidyDataSet.txt
